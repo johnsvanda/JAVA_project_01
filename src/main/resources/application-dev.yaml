@@ -1,0 +1,18 @@
+server.port: 8000
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    cz.mendelu.ja.leteckaposta: TRACE
+
+planes:
+  OK-AHT: Prague
+  OO-BKB: Brussels
+  CU-V1005: Havana

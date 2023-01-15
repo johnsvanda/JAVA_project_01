@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: dev
+
+
+restcountries.url: https://restcountries.com/v3.1/region/
+
+environments:
+  dev:
+    url: http://dev.example.com
+    name: Developer Setup
+  prod:
+    url: http://another.example.com
+    name: My Cool App
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - flyway
+          - mappings
+  info:
+    env.enabled: true
+    git.enabled: false
+
+
+info.app:
+  version: 1.1.0
+  encoding: ${project.build.sourceEncoding}
+  java.source: ${java.version}
+  java.target: ${java.version}
+
+
+planes:
+  OK-AHT: Prague
+  OO-BKB: Brussels
+  CU-V1005: Havana
