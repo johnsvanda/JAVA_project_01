@@ -1,18 +1,32 @@
 package cz.mendelu.ja.leteckaposta.planes.flight;
-
-import cz.mendelu.ja.leteckaposta.country.City;
-import cz.mendelu.ja.leteckaposta.parcel.Parcel;
-import cz.mendelu.ja.leteckaposta.planes.Plane;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Collection;
+import javax.persistence.*;
+
+import java.util.UUID;
 
 @Data
+@Table(name = "flights")
+@Entity
 public class Flight {
-    
-    private final Plane plane;
-    private final String number;
-    private final City from;
-    private final City destination;
-    private final Collection<Parcel> parcels;
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private UUID id;
+    private String plane;
+    private String number;
+    private String departure;
+    private String destination;
+//    @OneToMany
+//    private List<Parcel> parcels;
+    public Flight(){
+
+    }
+    public Flight(String plane, String number, String departure, String destination){
+        this.plane = plane;
+        this.number = number;
+        this.departure = departure;
+        this.destination = destination;
+    }
 }
