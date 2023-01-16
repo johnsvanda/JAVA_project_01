@@ -9,10 +9,10 @@ import cz.mendelu.ja.leteckaposta.planes.PlaneRepository;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -38,9 +38,11 @@ public class FlightService {
 
         List<Plane> availablePlanes = planeRepository.findAll();
         List<Parcel> parcels = parcelRepository.findAll();
-        List<Country> countries = countryService.getCountries();
+        List<Map<String, Object>> countries = countryService.getCountries();
+        countries.stream().map(country -> (Country) country);
         System.out.println(availablePlanes);
         System.out.println(parcels);
+        System.out.println(countries);
         return null;
     }
 

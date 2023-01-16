@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -29,6 +27,7 @@ public
 class CountryService {
 
     private final JdbcTemplate jdbcTemplate;
+
 
     @Value("${restcountries.url}")
     private String url;
@@ -61,13 +60,14 @@ class CountryService {
         jdbcTemplate.execute("delete from countries");
     }
 
-    public List<Country> getCountries() {
+    public List<Map<String, Object>> getCountries() {
          //countries = jdbcTemplate.execute("select *  from countries");
         String query = "SELECT * FROM countries";
+        Country country = new Country();
+        Long id = 1L;
+        return (List<Map<String, Object>>) jdbcTemplate.queryForList(query);
 
-        List<Country> countries = jdbcTemplate.query(query, new BeanPropertyRowMapper(Country.class));
 
-        return countries;
     };
 
     @Transactional
