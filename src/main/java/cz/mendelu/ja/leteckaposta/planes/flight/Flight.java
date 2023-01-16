@@ -1,8 +1,8 @@
-package cz.mendelu.ja.leteckaposta.plane.flight;
+package cz.mendelu.ja.leteckaposta.planes.flight;
 
 import cz.mendelu.ja.leteckaposta.country.City;
 import cz.mendelu.ja.leteckaposta.parcel.Parcel;
-import cz.mendelu.ja.leteckaposta.plane.Plane;
+import cz.mendelu.ja.leteckaposta.planes.Plane;
 import lombok.Data;
 
 import java.util.Collection;

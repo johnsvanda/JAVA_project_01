@@ -1,6 +1,13 @@
 spring:
   profiles:
     active: dev
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: PostgresSQLDialect
 
 
 restcountries.url: https://restcountries.com/v3.1/region/
@@ -35,7 +42,8 @@ info.app:
   java.target: ${java.version}
 
 
-planes:
-  OK-AHT: Prague
-  OO-BKB: Brussels
-  CU-V1005: Havana
+app:
+  planes:
+    OK-AHT: Prague
+    OO-BKB: Brussels
+    CU-V1005: Havana
