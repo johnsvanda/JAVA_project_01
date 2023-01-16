@@ -13,7 +13,7 @@ public class Flight {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private UUID id;
+    private String id;
     private String plane;
     private String number;
     private String departure;

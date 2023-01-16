@@ -13,7 +13,10 @@ import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+public
 class CountryService {
 
     private final JdbcTemplate jdbcTemplate;
@@ -56,6 +60,15 @@ class CountryService {
         jdbcTemplate.execute("delete from boarders");
         jdbcTemplate.execute("delete from countries");
     }
+
+    public List<Country> getCountries() {
+         //countries = jdbcTemplate.execute("select *  from countries");
+        String query = "SELECT * FROM countries";
+
+        List<Country> countries = jdbcTemplate.query(query, new BeanPropertyRowMapper(Country.class));
+
+        return countries;
+    };
 
     @Transactional
     List<ForignCountry> fetchCountries(String region){

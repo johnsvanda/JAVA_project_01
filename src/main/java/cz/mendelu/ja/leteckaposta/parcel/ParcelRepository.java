@@ -8,5 +8,5 @@ import java.util.UUID;
 
 
 @Repository
-public interface ParcelRepository extends JpaRepository<Parcel, UUID>{
+public interface ParcelRepository extends JpaRepository<Parcel, String>{
 }
