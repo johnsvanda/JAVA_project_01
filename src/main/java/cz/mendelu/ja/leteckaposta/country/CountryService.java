@@ -70,6 +70,16 @@ class CountryService {
 
     };
 
+    public Double getCountryLon(String cca3){
+        String sql = "SELECT capital_lng FROM countries WHERE cca3=?";
+        return jdbcTemplate.queryForObject(sql,new Object[]{cca3},Double.class);
+    }
+    public Double getCountryLat(String cca3){
+        String sql = "SELECT capital_lat FROM countries WHERE cca3=?";
+        return jdbcTemplate.queryForObject(sql,new Object[]{cca3},Double.class);
+    }
+
+
     @Transactional
     List<ForignCountry> fetchCountries(String region){
         log.info("Update countries fo region: {}{}", url, region);

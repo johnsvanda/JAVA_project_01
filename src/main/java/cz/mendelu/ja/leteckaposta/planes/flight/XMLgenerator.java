@@ -81,11 +81,7 @@ public class XMLgenerator {
         }
     }
     public static void main(String[] args) {
-        Runnable xmlInit = XMLgenerator::xmlInit;
-        //xmlInit();
 
-        val xml = new XMLgenerator();
-        updateXML("Prague", "London", "segasg", LocalDateTime.now());
     }
 }
 

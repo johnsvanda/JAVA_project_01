@@ -9,8 +9,11 @@ import cz.mendelu.ja.leteckaposta.planes.PlaneRepository;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +35,7 @@ public class FlightService {
     }
 
     @Autowired
-    CommandLineRunner FlightService(FlightRepository flightRepository, PlaneRepository planeRepository, ParcelRepository parcelRepository, CountryService countryService){
+    CommandLineRunner FlightService(FlightRepository flightRepository, PlaneRepository planeRepository, ParcelRepository parcelRepository, CountryService countryService) {
 
         val flightService = new FlightService(flightRepository, planeRepository, parcelRepository, countryService);
 
@@ -46,8 +49,38 @@ public class FlightService {
         return null;
     }
 
-    public void addFlight() {
+    /**
+     * @param parcelId - Assign a flight to a given parcel
+     * */
+    @Transactional
+    public String addFlight(String parcelId) {
+        Parcel p = parcelRepository.getReferenceById(parcelId);
+        String parcelDepatrure = p.getLocation();
+        Double parcelDepartureLat = countryService.getCountryLat(parcelDepatrure);
+        Double parcelDepartureLon = countryService.getCountryLon(parcelDepatrure);
+        List<Plane> availablePlanes = planeRepository.findAll();
+        double minDistance = 999999999;
+        Plane minPlane = new Plane();
 
+        for (Plane plane : availablePlanes) {
+            Double planeDepartureLat = countryService.getCountryLat(plane.getCurrentLocation());
+            Double planelDepartureLon = countryService.getCountryLon(plane.getCurrentLocation());
+            double distance = calculateDistanceInMeters(parcelDepartureLat, parcelDepartureLon, planeDepartureLat, planelDepartureLon);
+            if (distance < minDistance) {
+                minDistance = distance;
+                minPlane = plane;
+            }
+        }
 
+        flightRepository.save(new Flight(minPlane.getCode(), minPlane.getCode() + parcelId, p.getLocation(), p.getDestination()));
+        minPlane.setCurrentLocation(p.getDestination());
+        XMLgenerator.updateXML(p.getLocation(), p.getDestination(), p.getId(), LocalDateTime.now());
+        return minPlane.getCode() + parcelId;
+    }
+
+    public double calculateDistanceInMeters(double lat1, double long1, double lat2,
+                                            double long2) {
+        double dist = org.apache.lucene.util.SloppyMath.haversinMeters(lat1, long1, lat2, long2);
+        return dist;
     }
 }

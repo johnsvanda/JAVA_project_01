@@ -15,18 +15,19 @@ import java.util.UUID;
 @Table(name = "parcels")
 @Entity
 public class Parcel {
-@Id
-@GeneratedValue(generator = "system-uuid")
-@GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private UUID id;
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
     private String destination;
     private Double weight;
     private String location;
 
-    public Parcel(){
+    public Parcel() {
 
     }
-    public Parcel(String destination, Double weight, String location){
+
+    public Parcel(String destination, Double weight, String location) {
         this.destination = destination;
         this.weight = weight;
         this.location = location;

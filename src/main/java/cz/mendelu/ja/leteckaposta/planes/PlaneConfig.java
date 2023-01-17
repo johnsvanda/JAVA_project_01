@@ -16,15 +16,15 @@ public class PlaneConfig {
 
         return args -> {
             Plane p1 = new Plane(
-             "OK-AHT", 20, 1000, "Prague"
+             "OK-AHT", 20, 1000, "Prague", "CZE"
             );
 
             Plane p2 = new Plane(
-                    "OO-BKB", 30, 250, "Brussels"
+                    "OO-BKB", 30, 250, "Brussels", "BEL"
             );
 
             Plane p3 = new Plane(
-            "CU-V1005", 30, 250, "Havana"
+            "CU-V1005", 30, 250, "Havana", "EST"
             );
 
             planeRepository.saveAll(

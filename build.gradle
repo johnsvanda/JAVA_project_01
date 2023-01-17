@@ -27,6 +27,7 @@ dependencies {
 	// Development
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation group: 'org.apache.lucene', name: 'lucene-spatial', version: '8.2.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

@@ -15,12 +15,15 @@ public class Plane {
 
     private String defaultLocation;
 
-    public Plane(String code, double carryingCapacity, double flyDistance, String defaultLocation) {
+    private String currentLocation;
+
+    public Plane(String code, double carryingCapacity, double flyDistance, String defaultLocation, String currentLocation) {
 
         this.code = code;
         this.carryingCapacity = carryingCapacity;
         this.flyDistance = flyDistance;
         this.defaultLocation = defaultLocation;
+        this.currentLocation = currentLocation;
     }
 
     public Plane() {

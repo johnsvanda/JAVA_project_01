@@ -1,6 +1,8 @@
 package cz.mendelu.ja.leteckaposta;
 
+import cz.mendelu.ja.leteckaposta.planes.flight.XMLgenerator;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,11 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import java.time.LocalDateTime;
+
 @Slf4j
 @SpringBootApplication
 public class LeteckaPostaApplication {
 
 	public static void main(String[] args) {
+		XMLgenerator.xmlInit();
 		SpringApplication.run(LeteckaPostaApplication.class, args);
 	}
 
