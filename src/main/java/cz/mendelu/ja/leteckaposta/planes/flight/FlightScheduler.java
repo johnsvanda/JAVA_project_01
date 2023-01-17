@@ -33,6 +33,7 @@ public class FlightScheduler {
         List<Flight> flights = flightRepository.findAll();
         System.out.println(parcels);
         for (Parcel parcel : parcels) {
+            if(parcel.getId() == null) return;
             if (flights.stream().anyMatch(flight -> flight.getNumber().contains(parcel.getId()))) {
                 //parcel is already contained in a flight
             } else {
