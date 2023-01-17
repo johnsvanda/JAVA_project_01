@@ -12,6 +12,10 @@ public class ParcelService {
         this.parcelRepository = parcelRepository;
     }
 
+    /**
+     * Add a new parcel to database
+     * @param parcel parcel to create
+     * */
     public void addParcel(Parcel parcel) {
         parcelRepository.save(parcel);
     }

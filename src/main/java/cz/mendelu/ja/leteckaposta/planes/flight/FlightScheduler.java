@@ -25,6 +25,7 @@ public class FlightScheduler {
 
     /**
      * Service schedules new flights
+     * CRON to check for new parcels and assign them to flights
      */
     @Scheduled(fixedRate = 10000)
     public void scheduleFlights() {
@@ -33,7 +34,7 @@ public class FlightScheduler {
         System.out.println(parcels);
         for (Parcel parcel : parcels) {
             if (flights.stream().anyMatch(flight -> flight.getNumber().contains(parcel.getId()))) {
-                //parcel is already conatined in a flight
+                //parcel is already contained in a flight
             } else {
                 String flightId = flightService.addFlight(parcel.getId());
                 System.out.println(String.format("##################### New flight %s scheduled #############", flightId));
